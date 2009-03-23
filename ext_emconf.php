@@ -16,7 +16,7 @@ $EM_CONF[$_EXTKEY] = array(
 Modified version based on the Modern Template Building tutorial.',
 	'category' => 'be',
 	'shy' => 1,
-	'version' => '1.2.3',
+	'version' => '1.2.4',
 	'dependencies' => '',
 	'conflicts' => '',
 	'priority' => '',
