@@ -28,6 +28,9 @@ $tempColumns = Array (
 	),
 );
 
+	// initialize static extension templates
+t3lib_extMgm::addStaticFile($_EXTKEY,'static/','Template Selector Configuration');
+
 t3lib_div::loadTCA("pages");
 t3lib_extMgm::addTCAcolumns("pages",$tempColumns,1);
 t3lib_extMgm::addToAllTCAtypes("pages","tx_rlmptmplselector_main_tmpl;;;;1-1-1, tx_rlmptmplselector_ca_tmpl");
