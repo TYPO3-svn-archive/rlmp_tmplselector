@@ -1,3 +1,4 @@
+1.2.4 - 23.03.2009 - Changed TS inclusion to static template system
 1.2.3 - 28.11.2006
 		Bugfix: When creating a new page, the templates can't be selected because no page uid exists yet. Thanks to Michael Fritz for the fix.
 		Added Changelog
