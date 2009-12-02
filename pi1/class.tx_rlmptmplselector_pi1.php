@@ -2,7 +2,7 @@
 /***************************************************************
 *  Copyright notice
 *  
-*  (c) 2003 Kasper Skårhøj (kasper@typo3.org)
+*  (c) 2003 Kasper SkÃ¥rhÃ¸j (kasper@typo3.org)
 *  (c) 2004-2006 Robert Lemke (robert@typo3.org)
 *  All rights reserved
 *
@@ -25,7 +25,7 @@
 /** 
  * Plugin 'Template selector' for the 'rlmp_tmplselector' extension.
  *
- * @author	Kasper Skårhøj <kasper@typo3.com>
+ * @author	Kasper SkÃ¥rhÃ¸j <kasper@typo3.com>
  * @author Robert Lemke <robert@typo3.org>
  *  
  */
@@ -55,27 +55,26 @@ class tx_rlmptmplselector_pi1 extends tslib_pibase {
 
 		// GETTING configuration for the extension:
 		$confArray = unserialize($GLOBALS["TYPO3_CONF_VARS"]["EXT"]["extConf"]["rlmp_tmplselector"]);
-		$tmplConf = $TSFE->tmpl->setup["plugin."]["tx_rlmptmplselector_pi1."];
 		$rootLine = $TSFE->rootLine;
 		$pageSelect = t3lib_div::makeInstance('t3lib_pageSelect');
 		
 			// If we should inherit the template from above the current page, search for the next selected template
 			// and make it the default template
 		if (is_array ($rootLine)) {
-			if (intval($tmplConf['inheritMainTemplates']) == 1) {
+			if (intval($conf['inheritMainTemplates']) == 1) {
 				foreach ($rootLine as $rootLinePage) {
 					$page = $pageSelect->getPage ($rootLinePage['uid']);					
 					if ($page['tx_rlmptmplselector_main_tmpl']) {
-						$tmplConf['defaultTemplateFileNameMain'] = $tmplConf['defaultTemplateObjectMain'] = $page['tx_rlmptmplselector_main_tmpl'];
+						$conf['defaultTemplateFileNameMain'] = $conf['defaultTemplateObjectMain'] = $page['tx_rlmptmplselector_main_tmpl'];
 						break;
 					}
 				}
 			}
-			if (intval($tmplConf['inheritSubTemplates']) == 1) {
+			if (intval($conf['inheritSubTemplates']) == 1) {
 				foreach ($rootLine as $rootLinePage) {
 					$page = $pageSelect->getPage ($rootLinePage['uid']);
 					if ($page['tx_rlmptmplselector_ca_tmpl']) {
-						$tmplConf['defaultTemplateFileNameSub'] = $tmplConf['defaultTemplateObjectSub'] = $page['tx_rlmptmplselector_ca_tmpl'];
+						$conf['defaultTemplateFileNameSub'] = $conf['defaultTemplateObjectSub'] = $page['tx_rlmptmplselector_ca_tmpl'];
 						break;
 					}
 				}
@@ -88,16 +87,16 @@ class tx_rlmptmplselector_pi1 extends tslib_pibase {
 			switch ((string)$conf['templateType']) {
 				case 'sub':
 					$templateFile = $TSFE->page['tx_rlmptmplselector_ca_tmpl'];
-					$relPath = $tmplConf['templatePathSub'];
+					$relPath = $conf['templatePathSub'];
 						// Setting templateFile reference to the currently selected value - or the default if not set:
-					if (! $templateFile) { $templateFile = $tmplConf['defaultTemplateFileNameSub']; }
+					if (! $templateFile) { $templateFile = $conf['defaultTemplateFileNameSub']; }
 					break;
 				case 'main':
 					default:
 					$templateFile = $TSFE->page['tx_rlmptmplselector_main_tmpl'];
-					$relPath = $tmplConf['templatePathMain'];
+					$relPath = $conf['templatePathMain'];
 						// Setting templateFile reference to the currently selected value - or the default if not set:
-					if (! $templateFile) { $templateFile = $tmplConf['defaultTemplateFileNameMain']; }
+					if (! $templateFile) { $templateFile = $conf['defaultTemplateFileNameMain']; }
 				break;
 			}
 			  
@@ -121,17 +120,17 @@ class tx_rlmptmplselector_pi1 extends tslib_pibase {
 			switch ((string)$conf['templateType']) {
 				case 'sub':
 					$templateObjectNr = $TSFE->page['tx_rlmptmplselector_ca_tmpl'];
-					if (!$templateObjectNr) {	$templateObjectNr = $tmplConf['defaultTemplateObjectSub'];	}
+					if (!$templateObjectNr) {	$templateObjectNr = $conf['defaultTemplateObjectSub'];	}
 					break;
 				case 'main':
 				default:
 					$templateObjectNr = $TSFE->page['tx_rlmptmplselector_main_tmpl'];
-					if (!$templateObjectNr) {	$templateObjectNr = $tmplConf['defaultTemplateObjectMain'];	}
+					if (!$templateObjectNr) {	$templateObjectNr = $conf['defaultTemplateObjectMain'];	}
 				break;
 			}
 
 				// Parse the template
-			$lConf = &$tmplConf['templateObjects.'][(string)$conf['templateType'].'.'][$templateObjectNr.'.'];
+			$lConf = &$conf['templateObjects.'][(string)$conf['templateType'].'.'][$templateObjectNr.'.'];
 			$content = $this->cObj->TEMPLATE ($lConf);
 			return $content;	    	  
 		}
